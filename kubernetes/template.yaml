@@ -1,0 +1,32 @@
+apiVersion: backstage.io/v1beta2
+kind: Template
+metadata:
+  name: kubernetes-component
+  title: Kubernetes Component
+  description: Create a new Kubernetes component
+spec:
+  owner: team-name
+  type: service
+  steps:
+    - id: fetch-base
+      name: Fetch Base
+      action: fetch:cookiecutter
+      input:
+        url: https://github.com/my-org/kubernetes-component-template
+        values:
+          component_id: '{{ parameters.component_id }}'
+          description: '{{ parameters.description }}'
+  parameters:
+    - title: Fill in the following parameters for your new component
+      required:
+        - component_id
+        - description
+      properties:
+        component_id:
+          title: Component ID
+          type: string
+          description: Unique name of the component
+        description:
+          title: Description
+          type: string
+          description: Description of the component
