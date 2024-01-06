@@ -3,7 +3,8 @@ kind: Component
 metadata:
   name: ${{ values.name | dump }}
   annotations:
-    backstage.io/kubernetes-id: value
+    backstage.io/kubernetes-id: kind-cluster-1
+    backstage.io/techdocs-ref: dir:.
 spec:
   type: service
   owner: user:guest

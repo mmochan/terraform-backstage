@@ -113,4 +113,33 @@ catalog:
     # - type: url
     #   target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/acme-corp.yaml
     #   rules:
-    #     - allow: [User, Group]
+#     #     - allow: [User, Group]
+kubernetes:
+  serviceLocatorMethod:
+    type: 'singleTenant'
+  clusterLocatorMethods:
+    - type: 'localKubectlProxy'
+      clusters:
+        - url: https://127.0.0.1:60722
+          name: kind-cluster-1
+          authProvider: 'serviceAccount'
+          skipTLSVerify: false
+          skipMetricsLookup: true
+          serviceAccountToken: eyJhbGciOiJSUzI1NiIsImtpZCI6IkZ6WGdwR3FfdjZkN1ZzNFZsWE5YYjFGLVBqRVh3U3VSY0FDYVcxc3d5RFUifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWwiXSwiZXhwIjoxNzA0NTIzMjE3LCJpYXQiOjE3MDQ1MTk2MTcsImlzcyI6Imh0dHBzOi8va3ViZXJuZXRlcy5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsInNlcnZpY2VhY2NvdW50Ijp7Im5hbWUiOiJjZXJ0aWZpY2F0ZS1jb250cm9sbGVyIiwidWlkIjoiYzhlMTY2Y2UtYTM5YS00NWRlLThjNDYtODdkZDM1MWRlMWQxIn19LCJuYmYiOjE3MDQ1MTk2MTcsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlLXN5c3RlbTpjZXJ0aWZpY2F0ZS1jb250cm9sbGVyIn0.hgb0Afn68SJJQ4iPCDAy20Dm3Txorf-e4Veo_PeoaaRElmj5zKH9Tr2isBpBKXXqhfW4qEcTAxtlzcKR1ZmaNQlHyHHS_brnxwLDYIYARC9s-H5p-3IGgX4wl84PUci03Yw2pvcepIN38ZycNuVAlZsB7wyvGr1sX3FVGCi45U5RoiKKG-1jz09n8AuuZtc9qfu30G94iem_D_71OD5Ns_FaMnuibO42bkc0fu9D2zl9D5kd6dEGHxMydJbPsBiU8Ph1a6h8OhrDzHWjVLrd_Ad35dlV_XHqdghNH_ZkyMWY4Iw9K16-ycoWvBfl9qCtgvaQMTMUfwUW3Z0yBlzvKA
+#           dashboardUrl: http://127.0.0.1:64713 # url copied from running the command: minikube service kubernetes-dashboard -n kubernetes-dashboard
+#           dashboardApp: standard
+#           caData: ${K8S_CONFIG_CA_DATA}
+          caFile: '/Users/mmochan/.kube/config' # local path to CA file
+          customResources:
+            - group: 'argoproj.io'
+              apiVersion: 'v1alpha1'
+              plural: 'rollouts'
+#         - url: http://127.0.0.2:9999
+#           name: aws-cluster-1
+#           authProvider: 'aws'
+#     - type: 'kind'
+#       projectId: 'gke-clusters'
+#       region: 'europe-west1'
+#       skipTLSVerify: true
+#       skipMetricsLookup: true
+#       exposeDashboard: true
